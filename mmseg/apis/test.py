@@ -37,7 +37,7 @@ def single_gpu_test(model, data_loader, show=False, out_dir=None):
     for i, data in enumerate(data_loader):
         with torch.no_grad():
             if len(test_result)>2:
-                test_result.pop()
+                test_result.pop(0)
             img_metas = data['img_metas'][0].data[0]
             if len(data['refgt'][0]) == 1:
                 start_time = time()
@@ -67,7 +67,7 @@ def single_gpu_test(model, data_loader, show=False, out_dir=None):
             #     else:
             #         test_result.append(result)
             # if len(data['refgt'][0]) == 1:
-            #     data['refgt'][0].append(test_result[0])
+            #     data['refgt'][0].append(test_result[-1])
             #     result = model(return_loss=False, **data)
             #     if isinstance(result, tuple):
             #         test_result.append(result[0])
